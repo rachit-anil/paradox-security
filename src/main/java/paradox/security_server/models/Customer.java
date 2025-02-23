@@ -10,7 +10,7 @@ public class Customer {
     private String email;
     private String password;
 
-    // Getters and Setters
+    // Getters & Setters
     public Long getId() {
         return id;
     }
