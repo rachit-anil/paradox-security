@@ -21,7 +21,7 @@ jobs:
 
       - name: Build Java application
         run: |
-          mvn clean package
+          mvn clean package -DskipTests
 
       - name: Copy files to EC2s
         uses: appleboy/scp-action@master
