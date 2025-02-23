@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-alpine
+FROM openjdk:21-jdk
 WORKDIR /app
 COPY target/security-server-0.0.1-SNAPSHOT.jar security-server.jar
 EXPOSE 8080
