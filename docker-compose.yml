@@ -1,5 +1,36 @@
 version: '3.8'
 services:
+  app:
+    image: security-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      # Application properties
+      SPRING_APP_NAME: paradox
+      SPRING_SECURITY_LOG_LEVEL: TRACE
+      SPRING_PROFILES_ACTIVE: default
+      SPRING_CONFIG_IMPORT: application_prod.properties
+
+      # Database properties
+      DATABASE_HOST: mysql
+      DATABASE_PORT: 3306
+      DATABASE_NAME: spring
+      DATABASE_USERNAME: rachitanil
+      DATABASE_PASSWORD: root
+      JPA_SHOW_SQL: "true"
+      HIBERNATE_FORMAT_SQL: "true"
+
+      # Logging properties
+      LOGPATTERN_CONSOLE: "%green(%d{HH:mm:ss.SSS}) %blue(%-5level) %red([%thread]) %yellow(%logger{15}) - %msg%n"
+
+      # Session properties
+      SESSION_TIMEOUT: 20m
+
   mysql:
     image: mysql:5.7
     environment:
@@ -11,5 +42,6 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
+
 volumes:
   mysql-data:
