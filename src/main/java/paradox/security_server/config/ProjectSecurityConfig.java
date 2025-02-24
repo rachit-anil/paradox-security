@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.password.CompromisedPasswordChecker;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,22 +31,24 @@ public class ProjectSecurityConfig {
             "http://projectparadox.in"
     ));
 
+//    .cors(corsConfig -> corsConfig.configurationSource(new CorsConfigurationSource() {
+//        @Override
+//        public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+//            CorsConfiguration config = new CorsConfiguration();
+//            config.setAllowedOrigins(allowedOriginsList);
+//            config.setAllowedMethods(Collections.singletonList("*"));
+//            config.setAllowCredentials(true);
+//            config.setAllowedHeaders(Collections.singletonList("*"));
+//            config.setMaxAge(3600L);
+//            return config;
+//        }
+//    }))
+
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         CsrfTokenRequestAttributeHandler csrfTokenRequestAttributeHandler = new CsrfTokenRequestAttributeHandler();
         http
-                .cors(corsConfig -> corsConfig.configurationSource(new CorsConfigurationSource() {
-                    @Override
-                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-                        CorsConfiguration config = new CorsConfiguration();
-                        config.setAllowedOrigins(allowedOriginsList);
-                        config.setAllowedMethods(Collections.singletonList("*"));
-                        config.setAllowCredentials(true);
-                        config.setAllowedHeaders(Collections.singletonList("*"));
-                        config.setMaxAge(3600L);
-                        return config;
-                    }
-                }))
+                .cors(AbstractHttpConfigurer::disable)
                 .securityContext(contextConfig -> contextConfig.requireExplicitSave(false))
                 .sessionManagement(sessionConfig -> sessionConfig.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .requiresChannel(rcc -> rcc.anyRequest().requiresInsecure()) // Only HTTP
