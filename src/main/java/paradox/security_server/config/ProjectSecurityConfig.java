@@ -40,19 +40,20 @@ public class ProjectSecurityConfig {
 //                .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
 //                .securityContext(contextConfig -> contextConfig.requireExplicitSave(false))
 //
-        http
-                .cors(corsConfig -> corsConfig.configurationSource(new CorsConfigurationSource() {
-                    @Override
-                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-                        CorsConfiguration config = new CorsConfiguration();
-                        config.setAllowedOrigins(allowedOriginsList);
-                        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-                        config.setAllowCredentials(true);
-                        config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization", "X-Requested-With"));
-                        config.setMaxAge(3600L);
-                        return config;
-                    }
-                }))
+//        http
+//                .cors(corsConfig -> corsConfig.configurationSource(new CorsConfigurationSource() {
+//                    @Override
+//                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+//                        CorsConfiguration config = new CorsConfiguration();
+//                        config.setAllowedOrigins(allowedOriginsList);
+//                        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+//                        config.setAllowCredentials(true);
+//                        config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization", "X-Requested-With"));
+//                        config.setMaxAge(3600L);
+//                        return config;
+//                    }
+//                }))
+        http.cors(cors-> cors.disable())
                 .sessionManagement(sessionConfig -> sessionConfig.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .requiresChannel(rcc -> rcc.anyRequest().requiresInsecure()) // Only HTTP
                 .authorizeHttpRequests((requests) -> requests
