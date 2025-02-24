@@ -106,5 +106,5 @@ public class UserController {
     }
 
     @GetMapping("/public")
-    public String loginUser() {return "public data";}
+    public ResponseEntity<String> loginUser() {return ResponseEntity.status(HttpStatus.OK).body("Hello");}
 }
