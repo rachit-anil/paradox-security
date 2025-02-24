@@ -1,6 +1,8 @@
 services:
   app:
     image: security-server
+    volumes:
+      - ./src/main/resources/application.properties:/app/application.properties
     build:
       context: .
       dockerfile: Dockerfile
