@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
            java-version: '21.0.4'
-           distribution: 'corretto' # Use Temurin (Adoptium) JDK
+           distribution: 'corretto'
 
       - name: Build Java application
         run: |
