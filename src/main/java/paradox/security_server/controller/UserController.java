@@ -104,4 +104,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+
+    @GetMapping("/public")
+    public String loginUser() {return "public data";}
 }

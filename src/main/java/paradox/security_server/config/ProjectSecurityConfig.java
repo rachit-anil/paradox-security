@@ -27,11 +27,9 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 public class ProjectSecurityConfig {
     ArrayList<String> allowedOriginsList = new ArrayList<>(Arrays.asList(
-            "http://localhost:4200",
-            "http://projectparadox.in"
+            "http://projectparadox.in",
+            "http://localhost:4200"
     ));
-
-
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -58,7 +56,7 @@ public class ProjectSecurityConfig {
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
-                        .requestMatchers("/notices", "/contact", "/error", "/auth/signup", "/auth/login").permitAll());
+                        .requestMatchers("/notices", "/contact", "/error", "/auth/signup", "/auth/login","auth/public").permitAll());
         http.formLogin(withDefaults());
 //        http.httpBasic(hbc -> hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()));
 //        http.exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()));
