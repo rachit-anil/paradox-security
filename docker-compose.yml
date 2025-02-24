@@ -14,7 +14,7 @@ services:
       SPRING_APP_NAME: paradox
       SPRING_SECURITY_LOG_LEVEL: TRACE
       SPRING_PROFILES_ACTIVE: default
-      SPRING_CONFIG_IMPORT: application_prod.properties
+      SPRING_CONFIG_IMPORT: application.properties
 
       # Database properties
       DATABASE_HOST: mysql
@@ -32,7 +32,7 @@ services:
       SESSION_TIMEOUT: 20m
 
   mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: spring
