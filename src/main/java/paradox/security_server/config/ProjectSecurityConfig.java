@@ -42,9 +42,9 @@ public class ProjectSecurityConfig {
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                         CorsConfiguration config = new CorsConfiguration();
                         config.setAllowedOrigins(allowedOriginsList);
-                        config.setAllowedMethods(Collections.singletonList("*"));
+                        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                         config.setAllowCredentials(true);
-                        config.setAllowedHeaders(Collections.singletonList("*"));
+                        config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization", "X-Requested-With"));
                         config.setMaxAge(3600L);
                         return config;
                     }
