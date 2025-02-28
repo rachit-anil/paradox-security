@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController()
+@CrossOrigin(origins = "https://projectparadox.in")
 @RequestMapping("/auth")
 public class UserController {
 
