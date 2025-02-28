@@ -28,7 +28,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class ProjectSecurityConfig {
     ArrayList<String> allowedOriginsList = new ArrayList<>(Arrays.asList(
             "http://localhost:4200",
-            "http://projectparadox.in"
+            "https://projectparadox.in"
     ));
 
     @Bean
@@ -46,7 +46,8 @@ public class ProjectSecurityConfig {
                         config.setMaxAge(3600L);
                         return config;
                     }
-                }));
+                }))
+                .requiresChannel(rcc -> rcc.anyRequest().requiresSecure()); // Only HTTPS;
 
 //                .authorizeHttpRequests((requests) -> requests
 //                        .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
